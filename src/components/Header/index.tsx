@@ -6,7 +6,9 @@ import { NavLink } from 'react-router-dom'
 export function Header() {
   return (
     <HeaderContainer>
-      <img src={LogoCoffe} alt="" />
+      <NavLink to="/">
+        <img src={LogoCoffe} alt="" />
+      </NavLink>
       <nav>
         <IconMap>
           <MapPin size={22} weight="fill" />
