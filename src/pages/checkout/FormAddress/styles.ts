@@ -5,6 +5,15 @@ export const FormAddressContainer = styled.div`
   flex-direction: column;
   flex: 1;
   gap: 0.75rem;
+
+  h2 {
+    font-family: 'Baloo 2';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.8rem;
+    line-height: 130%;
+    margin-bottom: 1.5rem;
+  }
 `
 
 export const FormContainerBase = styled.div`
