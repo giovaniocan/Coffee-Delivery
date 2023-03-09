@@ -27,7 +27,9 @@ export const CoffeeCard = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #e6e5e5;
   img {
     width: 4rem;
     height: 4rem;
@@ -36,6 +38,13 @@ export const CoffeeCard = styled.div`
   div {
     display: flex;
     align-items: center;
+  }
+
+  h2 {
+    color: ${(props) => props.theme['base-text']};
+    font-family: 'Roboto';
+    line-height: 130%;
+    font-weight: 700;
   }
 `
 export const InfoCard = styled.div`
@@ -51,17 +60,93 @@ export const InfoCard = styled.div`
 `
 
 export const ButtonOfCard = styled.div`
-  gap: 0.5rem;
-  padding-left: 2rem;
-  background: ${(props) => props.theme['base-button']};
+  margin-left: 2rem;
+  gap: 1rem;
+
+  svg {
+    color: ${(props) => props.theme.purple};
+  }
 `
 
-export const PlusAndMinus = styled.div``
+export const PlusAndMinus = styled.div`
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.5rem;
+  background: ${(props) => props.theme['base-button']};
+  border-radius: 6px;
 
-export const RemoveButton = styled.button``
+  h4 {
+    color: ${(props) => props.theme['base-title']};
+    font-size: 1rem;
+    font-family: 'Robot';
+    font-weight: 400;
+    line-height: 130%;
+  }
+`
 
-export const SubTotal = styled.div``
+export const RemoveButton = styled.button`
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.5rem;
+  border: none;
 
-export const Total = styled.div``
+  background: ${(props) => props.theme['base-button']};
+  border-radius: 6px;
+  h3 {
+    color: ${(props) => props.theme['base-text']};
+    font-size: 0.75rem;
+    line-height: 160%;
+    font-weight: 400;
+  }
+`
 
-export const FinishedButton = styled.button``
+export const SubTotal = styled.div`
+  padding-top: 2rem;
+
+  div {
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    p {
+      font-size: 0.875rem;
+    }
+
+    h4 {
+      line-height: 130%;
+      font-weight: 400;
+      font-size: 1rem;
+    }
+  }
+`
+
+export const Total = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  p {
+    color: ${(props) => props.theme['base-subtitle']};
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 130%;
+  }
+`
+
+export const FinishedButton = styled.button`
+  margin-top: 1.5rem;
+  width: 100%;
+  height: 3rem;
+  background: ${(props) => props.theme.yellow};
+  border: none;
+  padding: 0.75rem;
+
+  color: ${(props) => props.theme.white};
+  text-transform: uppercase;
+  font-weight: 700;
+  line-height: 160%;
+  font-size: 0.875ren;
+
+  border-radius: 4px;
+`
