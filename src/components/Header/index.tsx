@@ -16,7 +16,7 @@ export function Header() {
         </IconMap>
 
         <IconCar>
-          <NavLink to="/checkout" title="checkout">
+          <NavLink to="/success" title="checkout">
             <ShoppingCart size={22} color="#C47F17" weight="fill" />
           </NavLink>
           <p>5</p>
