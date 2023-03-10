@@ -1,21 +1,58 @@
-import { NavLink } from 'react-router-dom'
 import { CardCoffee } from './cardCoffee'
+import { FormProvider, useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as zod from 'zod'
 
 import { FormAddress } from './FormAddress'
 import {
   CardContainer,
   CartCoffeeContainer,
-  CheckoutContainer,
   FinishedButton,
+  FormContainer,
   SubTotal,
   Total,
 } from './styles'
 
-export function Checkout() {
-  return (
-    <CheckoutContainer>
-      <FormAddress />
+const NewFormValidationSchema = zod.object({
+  cep: zod.number().min(1, 'Informe o CEP'),
+  street: zod.string().min(1, 'Informe a rua'),
+  houseNumber: zod.number().min(1, 'Informe o número da casa'),
+  complement: zod.string().optional(),
+  district: zod.string().min(1, 'Informe o bairro'),
+  city: zod.string().min(1, 'Informe a cidade'),
+  state: zod.string().min(1, 'Informe o estado'),
+  paymentMethods: zod.string(),
+})
 
+type NewFormData = zod.infer<typeof NewFormValidationSchema>
+
+export function Checkout() {
+  const NewForm = useForm<NewFormData>({
+    resolver: zodResolver(NewFormValidationSchema),
+    defaultValues: {
+      cep: undefined,
+      street: '',
+      houseNumber: undefined,
+      complement: '',
+      district: '',
+      city: '',
+      state: '',
+      paymentMethods: '',
+    },
+  })
+
+  const { handleSubmit, reset } = NewForm
+
+  function onSubmit(data: NewFormData) {
+    console.log(data) // faça algo com os dados aqui
+    reset()
+  }
+
+  return (
+    <FormContainer onSubmit={handleSubmit(onSubmit)}>
+      <FormProvider {...NewForm}>
+        <FormAddress />
+      </FormProvider>
       <CartCoffeeContainer>
         <h2>Faça o seu pedido</h2>
         <CardContainer>
@@ -35,11 +72,10 @@ export function Checkout() {
             <p>Total</p>
             <p>R$ 33,20</p>
           </Total>
-          <NavLink to="/success" title="checkout">
-            <FinishedButton>confirmar pedido</FinishedButton>
-          </NavLink>
+
+          <FinishedButton type="submit">confirmar pedido</FinishedButton>
         </CardContainer>
       </CartCoffeeContainer>
-    </CheckoutContainer>
+    </FormContainer>
   )
 }

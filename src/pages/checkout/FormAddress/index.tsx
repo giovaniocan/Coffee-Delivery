@@ -5,6 +5,7 @@ import {
   MapPin,
   Money,
 } from 'phosphor-react'
+import { useFormContext } from 'react-hook-form'
 import {
   FormAddressContainer,
   FormContainerBase,
@@ -23,6 +24,7 @@ import {
 } from './styles'
 
 export function FormAddress() {
+  const { register } = useFormContext()
   return (
     <FormAddressContainer>
       <h2>Complete o Seu pedido</h2>
@@ -35,16 +37,47 @@ export function FormAddress() {
           </div>
         </HeaderContainerForm>
         <InputContainer>
-          <InputCep placeholder="CEP" />
-          <InputRua placeholder="Rua" />
+          <InputCep
+            type="number"
+            placeholder="CEP"
+            required
+            {...register('cep', { valueAsNumber: true })}
+          />
+          <InputRua type="text" placeholder="Rua" {...register('street')} />
           <Arrumaralina>
-            <InputNumero placeholder="Número" />
-            <InputComplement placeholder="Complemento" />
+            <InputNumero
+              type="number"
+              placeholder="Número"
+              required
+              {...register('houseNumber', { valueAsNumber: true })}
+            />
+            <InputComplement
+              type="text"
+              placeholder="Complemento (Opcional)"
+              {...register('complement')}
+            />
           </Arrumaralina>
           <Arrumaralina>
-            <InputBairro placeholder="Bairro" />
-            <InputCidade placeholder="Cidade" />
-            <InputUf placeholder="UF" />
+            <InputBairro
+              type="text"
+              placeholder="Bairro"
+              required
+              {...register('district')}
+            />
+            <InputCidade
+              placeholder="Cidade"
+              id="city"
+              type="text"
+              {...register('city')}
+            />
+            <InputUf
+              type="text"
+              placeholder="UF"
+              required
+              {...register('state')}
+              minLength={2}
+              maxLength={2}
+            />
           </Arrumaralina>
         </InputContainer>
       </FormContainerBase>
@@ -58,6 +91,7 @@ export function FormAddress() {
             </p>
           </div>
         </HeaderContainerForm>
+
         <PaymentContainer>
           <MethodPayment>
             <input
@@ -65,6 +99,7 @@ export function FormAddress() {
               id="credit"
               /* name="paymentMethods" */
               value="Cartão de Crédito"
+              {...register('paymentMethods')}
             />
             <label htmlFor="credit">
               <CreditCard size={16} />
@@ -75,8 +110,7 @@ export function FormAddress() {
             <input
               type="radio"
               id="debit"
-              /* name="paymentMethods" */
-              // {...register('paymentMethods')}  acho que assim funcionaria o radio/*
+              {...register('paymentMethods')}
               value="Cartão de Débito"
             />
             <label htmlFor="debit">
@@ -88,8 +122,8 @@ export function FormAddress() {
             <input
               type="radio"
               id="money"
-              /* espero que seja assim msm */
               value="Dinheiro"
+              {...register('paymentMethods')}
             />
             <label htmlFor="money">
               <Money size={16} />

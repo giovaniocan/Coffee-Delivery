@@ -2,7 +2,14 @@ import styled from 'styled-components'
 
 export const CheckoutContainer = styled.div`
   display: flex;
+  align-items: flex-start;
   gap: 3rem;
+  margin-top: 3rem;
+`
+export const FormContainer = styled.form`
+  display: flex;
+  justify-content: space-between;
+  gap: 15.5rem;
   margin-top: 3rem;
 `
 
