@@ -3,6 +3,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as zod from 'zod'
 
+import { useNavigate } from 'react-router-dom'
 import { FormAddress } from './FormAddress'
 import {
   CardContainer,
@@ -43,9 +44,12 @@ export function Checkout() {
 
   const { handleSubmit, reset } = NewForm
 
+  const navigate = useNavigate()
+
   function onSubmit(data: NewFormData) {
     console.log(data) // faça algo com os dados aqui
     reset()
+    navigate('/success')
   }
 
   return (
