@@ -26,10 +26,12 @@ export const ProductCardContainer = styled.div`
   }
 
   p {
+    text-align: center;
     margin-top: 0.5rem;
     font-size: 0.875rem;
     line-height: 130%;
     color: ${(props) => props.theme['base-label']};
+    margin: 0.5rem 1.25rem auto;
   }
 `
 
@@ -38,11 +40,15 @@ export const Tags = styled.div`
   font-size: 0.625rem;
   line-height: 130%;
 
-  color: ${(props) => props.theme['yellow-dark']};
-  background: ${(props) => props.theme['yellow-light']};
+  display: flex;
+  gap: 0.25rem;
 
-  padding: 0.25rem 0.5rem;
-  border-radius: 8px;
+  span {
+    color: ${(props) => props.theme['yellow-dark']};
+    background: ${(props) => props.theme['yellow-light']};
+    padding: 0.25rem 0.5rem;
+    border-radius: 8px;
+  }
 
   margin: 0.75rem;
 `
@@ -52,7 +58,7 @@ export const Footer = styled.div`
   flex-direction: row;
   align-items: center;
 
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   gap: 0.5rem;
 
   span {

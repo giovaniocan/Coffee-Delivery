@@ -27,8 +27,8 @@ export function ProductCard({ coffee }: ProductCardProps) {
       <img src={`/src/assets/${coffee.image}`} />
 
       <Tags>
-        {coffee.tags.map((tag: String) => {
-          return <span key={`${coffee.id}${tag}`}>{tag}</span>
+        {coffee.tags.map((tag: string) => {
+          return <span key={tag}>{tag}</span>
         })}
       </Tags>
 
