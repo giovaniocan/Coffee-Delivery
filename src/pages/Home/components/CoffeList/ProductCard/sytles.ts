@@ -78,6 +78,7 @@ export const Actions = styled.div`
 
   background: ${(props) => props.theme['base-button']};
   padding: 1rem 0.5rem;
+  cursor: pointer;
 
   gap: 0.25rem;
 

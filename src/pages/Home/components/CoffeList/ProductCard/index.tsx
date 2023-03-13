@@ -1,4 +1,5 @@
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
+import { useState } from 'react'
 import {
   Footer,
   ProductCardContainer,
@@ -22,6 +23,12 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ coffee }: ProductCardProps) {
+  const [quantity, setQuantity] = useState(coffee.quantSelected)
+
+  function handleIncrease() {
+    setQuantity((state) => state + 1)
+  }
+
   return (
     <ProductCardContainer>
       <img src={`/src/assets/${coffee.image}`} />
@@ -39,8 +46,8 @@ export function ProductCard({ coffee }: ProductCardProps) {
         <span>R$ {coffee.price}0</span>
         <Actions>
           <Minus color="#8047F8" size={20} />
-          <section>{coffee.quantSelected}</section>
-          <Plus color="#8047F8" size={20} />
+          <section>{quantity}</section>
+          <Plus color="#8047F8" size={20} onClick={handleIncrease} />
         </Actions>
         <IconCarSupermarkt>
           <ShoppingCart size={35} weight="fill" color="#fff" />

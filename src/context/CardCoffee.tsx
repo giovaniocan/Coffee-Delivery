@@ -1,6 +1,4 @@
-/* import { createContext, ReactNode } from 'react'
-
-
+import { createContext, ReactNode } from 'react'
 
 interface CardCoffee {
   id: number
@@ -9,6 +7,7 @@ interface CardCoffee {
   title: string
   description: string
   price: number
+  quantSelected: number
 }
 
 interface CardCoffeeContextType {
@@ -29,4 +28,3 @@ export function CardCoffeeContextProvider({
     </CardCoffeeContext.Provider>
   )
 }
- */
