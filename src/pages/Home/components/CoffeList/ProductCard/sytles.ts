@@ -97,4 +97,5 @@ export const IconCarSupermarkt = styled.div`
   border-radius: 4px;
   padding-left: 0.2rem;
   padding-top: 0.5rem;
+  cursor: pointer;
 `

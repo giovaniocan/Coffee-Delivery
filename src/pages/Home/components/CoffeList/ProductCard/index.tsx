@@ -1,5 +1,6 @@
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
 import { useContext, useState } from 'react'
+import { CardCoffeeContext } from '../../../../../context/CardCoffee'
 import {
   Footer,
   ProductCardContainer,
@@ -25,7 +26,7 @@ interface ProductCardProps {
 export function ProductCard({ coffee }: ProductCardProps) {
   const [quantity, setQuantity] = useState(coffee.quantSelected)
 
-  const {} = useContext(CartContext)
+  const { AddCoffeToCart } = useContext(CardCoffeeContext)
 
   function handleIncrease() {
     setQuantity((state) => state + 1)
@@ -39,7 +40,10 @@ export function ProductCard({ coffee }: ProductCardProps) {
     }
   }
 
-  function handleAddToCart() {}
+  function handleAddToCart() {
+    AddCoffeToCart(coffee, quantity)
+    setQuantity(0)
+  }
 
   return (
     <ProductCardContainer>

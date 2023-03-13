@@ -13,6 +13,8 @@ import {
   SubTotal,
   Total,
 } from './styles'
+import { useContext } from 'react'
+import { CardCoffeeContext } from '../../context/CardCoffee'
 
 const NewFormValidationSchema = zod.object({
   cep: zod.number().min(1, 'Informe o CEP'),
@@ -28,6 +30,8 @@ const NewFormValidationSchema = zod.object({
 type NewFormData = zod.infer<typeof NewFormValidationSchema>
 
 export function Checkout() {
+  const { cartItems } = useContext(CardCoffeeContext)
+
   const NewForm = useForm<NewFormData>({
     resolver: zodResolver(NewFormValidationSchema),
     defaultValues: {
@@ -60,7 +64,9 @@ export function Checkout() {
       <CartCoffeeContainer>
         <h2>Faça o seu pedido</h2>
         <CardContainer>
-          <CardCoffee />
+          {cartItems.map((item) => {
+            return <CardCoffee key={item.id} coffee={item} />
+          })}
 
           <SubTotal>
             <div>

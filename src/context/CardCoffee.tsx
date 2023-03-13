@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useState } from 'react'
 import { produce } from 'immer'
-interface CardCoffee {
+export interface CardCoffee {
   id: number
   image: string
   tags: string[]
@@ -11,8 +11,8 @@ interface CardCoffee {
 }
 
 interface CardCoffeeContextType {
-  cards: CardCoffee[]
-  AddCoffeToCart: (data: CardCoffee) => void
+  cartItems: CardCoffee[]
+  AddCoffeToCart: (data: CardCoffee, quant: number) => void
 }
 interface CardCoffeeProviderProps {
   children: ReactNode
@@ -25,16 +25,24 @@ export function CardCoffeeContextProvider({
 }: CardCoffeeProviderProps) {
   const [cartItems, serCartItems] = useState<CardCoffee[]>([])
 
-  function AddCoffeToCart(data: CardCoffee) {
+  function AddCoffeToCart(data: CardCoffee, quant: number) {
     serCartItems(
       produce(cartItems, (draft) => {
-        draft.push(data)
+        draft.push({
+          description: data.description,
+          id: data.id,
+          image: data.image,
+          price: data.price,
+          quantSelected: quant,
+          tags: data.tags,
+          title: data.title,
+        })
       }),
     )
   }
 
   return (
-    <CardCoffeeContext.Provider value={AddCoffeToCart}>
+    <CardCoffeeContext.Provider value={{ AddCoffeToCart, cartItems }}>
       {children}
     </CardCoffeeContext.Provider>
   )

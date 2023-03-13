@@ -7,17 +7,30 @@ import {
   RemoveButton,
 } from './styles'
 
-export function CardCoffee() {
+interface Coffee {
+  id: number
+  image: string
+  tags: string[]
+  title: string
+  description: string
+  price: number
+  quantSelected: number
+}
+
+interface CardCoffeeProps {
+  coffee: Coffee
+}
+export function CardCoffee({ coffee }: CardCoffeeProps) {
   return (
     <CoffeeCard>
       <div>
-        <img src="https://static.wixstatic.com/media/13a672_3e7ab53c2de84368b95205ff4d36f273~mv2.png/v1/fill/w_196,h_194,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/caf%C3%A9.png" />
+        <img src={`/src/assets/${coffee.image}`} />{' '}
         <InfoCard>
-          <p>Nome do café</p>
+          <p>{coffee.title}</p>
           <ButtonOfCard>
             <PlusAndMinus>
               <Minus />
-              <h4>1</h4>
+              <h4>{coffee.quantSelected}</h4>
               <Plus />
             </PlusAndMinus>
             <RemoveButton>
@@ -27,7 +40,7 @@ export function CardCoffee() {
           </ButtonOfCard>
         </InfoCard>
       </div>
-      <h2>R$ 9,90</h2>
+      <h2>R$ {coffee.price}0</h2>
     </CoffeeCard>
   )
 }
