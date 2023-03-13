@@ -41,8 +41,12 @@ export function ProductCard({ coffee }: ProductCardProps) {
   }
 
   function handleAddToCart() {
-    AddCoffeToCart(coffee, quantity)
-    setQuantity(0)
+    if (quantity > 0) {
+      AddCoffeToCart(coffee, quantity)
+      setQuantity(0)
+    } else {
+      alert('deve ter itens no carrinho para adicionar')
+    }
   }
 
   return (

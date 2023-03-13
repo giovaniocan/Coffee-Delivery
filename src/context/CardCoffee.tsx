@@ -26,17 +26,25 @@ export function CardCoffeeContextProvider({
   const [cartItems, serCartItems] = useState<CardCoffee[]>([])
 
   function AddCoffeToCart(data: CardCoffee, quant: number) {
+    const coffeeAlreadyExistsInCart = cartItems.findIndex(
+      (item) => item.id === data.id,
+    )
+
     serCartItems(
       produce(cartItems, (draft) => {
-        draft.push({
-          description: data.description,
-          id: data.id,
-          image: data.image,
-          price: data.price,
-          quantSelected: quant,
-          tags: data.tags,
-          title: data.title,
-        })
+        if (coffeeAlreadyExistsInCart === -1) {
+          draft.push({
+            description: data.description,
+            id: data.id,
+            image: data.image,
+            price: data.price,
+            quantSelected: quant,
+            tags: data.tags,
+            title: data.title,
+          })
+        } else {
+          draft[coffeeAlreadyExistsInCart].quantSelected += quant
+        }
       }),
     )
   }
