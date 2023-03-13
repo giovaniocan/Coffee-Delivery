@@ -14,6 +14,7 @@ interface CardCoffeeContextType {
   cartItems: CardCoffee[]
   AddCoffeToCart: (data: CardCoffee, quant: number) => void
   ChargeAmountCoffee: (id: number, type: 'increase' | 'decrease') => void
+  removeCoffeFromList: (id: number) => void
 }
 interface CardCoffeeProviderProps {
   children: ReactNode
@@ -63,9 +64,25 @@ export function CardCoffeeContextProvider({
     )
   }
 
+  function removeCoffeFromList(id: number) {
+    const coffeEExistsInCart = cartItems.findIndex((item) => item.id === id)
+    if (coffeEExistsInCart !== -1) {
+      serCartItems(
+        produce(cartItems, (draft) => {
+          draft.splice(coffeEExistsInCart, 1)
+        }),
+      )
+    }
+  }
+
   return (
     <CardCoffeeContext.Provider
-      value={{ AddCoffeToCart, cartItems, ChargeAmountCoffee }}
+      value={{
+        AddCoffeToCart,
+        cartItems,
+        ChargeAmountCoffee,
+        removeCoffeFromList,
+      }}
     >
       {children}
     </CardCoffeeContext.Provider>
