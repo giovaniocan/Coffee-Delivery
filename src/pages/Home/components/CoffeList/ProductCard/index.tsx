@@ -45,7 +45,7 @@ export function ProductCard({ coffee }: ProductCardProps) {
       AddCoffeToCart(coffee, quantity)
       setQuantity(0)
     } else {
-      alert('deve ter itens no carrinho para adicionar')
+      alert('deve ter itens no carrinho')
     }
   }
 

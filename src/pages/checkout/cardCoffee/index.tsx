@@ -1,4 +1,6 @@
 import { Minus, Plus, Trash } from 'phosphor-react'
+import { useContext, useState } from 'react'
+import { CardCoffeeContext } from '../../../context/CardCoffee'
 import {
   ButtonOfCard,
   CoffeeCard,
@@ -21,6 +23,13 @@ interface CardCoffeeProps {
   coffee: Coffee
 }
 export function CardCoffee({ coffee }: CardCoffeeProps) {
+  const { increseAmountCoffee } = useContext(CardCoffeeContext)
+  const [quantity, setQuantity] = useState(coffee.quantSelected)
+  function handleIncreaseAmount() {
+    increseAmountCoffee(coffee.id)
+
+    setQuantity((state) => state + 1)
+  }
   return (
     <CoffeeCard>
       <div>
@@ -30,8 +39,8 @@ export function CardCoffee({ coffee }: CardCoffeeProps) {
           <ButtonOfCard>
             <PlusAndMinus>
               <Minus />
-              <h4>{coffee.quantSelected}</h4>
-              <Plus />
+              <h4>{quantity}</h4>
+              <Plus onClick={handleIncreaseAmount} />
             </PlusAndMinus>
             <RemoveButton>
               <Trash />

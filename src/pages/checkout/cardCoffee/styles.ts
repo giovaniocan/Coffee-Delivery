@@ -51,6 +51,7 @@ export const PlusAndMinus = styled.div`
   padding: 0.5rem;
   background: ${(props) => props.theme['base-button']};
   border-radius: 6px;
+  cursor: pointer;
 
   h4 {
     color: ${(props) => props.theme['base-title']};
