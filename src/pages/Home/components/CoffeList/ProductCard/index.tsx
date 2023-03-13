@@ -29,6 +29,14 @@ export function ProductCard({ coffee }: ProductCardProps) {
     setQuantity((state) => state + 1)
   }
 
+  function handleDecrease() {
+    if (quantity > 0) {
+      setQuantity((state) => state - 1)
+    } else {
+      alert('A quantidade não pode ser negativa')
+    }
+  }
+
   return (
     <ProductCardContainer>
       <img src={`/src/assets/${coffee.image}`} />
@@ -45,7 +53,7 @@ export function ProductCard({ coffee }: ProductCardProps) {
       <Footer>
         <span>R$ {coffee.price}0</span>
         <Actions>
-          <Minus color="#8047F8" size={20} />
+          <Minus color="#8047F8" size={20} onClick={handleDecrease} />
           <section>{quantity}</section>
           <Plus color="#8047F8" size={20} onClick={handleIncrease} />
         </Actions>
