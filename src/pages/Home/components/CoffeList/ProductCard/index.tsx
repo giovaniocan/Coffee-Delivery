@@ -1,5 +1,5 @@
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import {
   Footer,
   ProductCardContainer,
@@ -25,6 +25,8 @@ interface ProductCardProps {
 export function ProductCard({ coffee }: ProductCardProps) {
   const [quantity, setQuantity] = useState(coffee.quantSelected)
 
+  const {} = useContext(CartContext)
+
   function handleIncrease() {
     setQuantity((state) => state + 1)
   }
@@ -36,6 +38,8 @@ export function ProductCard({ coffee }: ProductCardProps) {
       alert('A quantidade não pode ser negativa')
     }
   }
+
+  function handleAddToCart() {}
 
   return (
     <ProductCardContainer>
@@ -57,7 +61,7 @@ export function ProductCard({ coffee }: ProductCardProps) {
           <section>{quantity}</section>
           <Plus color="#8047F8" size={20} onClick={handleIncrease} />
         </Actions>
-        <IconCarSupermarkt>
+        <IconCarSupermarkt onClick={handleAddToCart}>
           <ShoppingCart size={35} weight="fill" color="#fff" />
         </IconCarSupermarkt>
       </Footer>
