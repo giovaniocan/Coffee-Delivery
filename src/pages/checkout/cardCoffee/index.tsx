@@ -34,9 +34,14 @@ export function CardCoffee({ coffee }: CardCoffeeProps) {
   }
 
   function DecreaseIncreaseAmount() {
-    ChargeAmountCoffee(coffee.id, 'decrease')
+    if (quantity === 1) {
+      // se for igual a 1, quando diminuir vai passar a ser 0, ou seja, ele sera tirado do carrinho
+      removeCoffeFromList(coffee.id)
+    } else {
+      ChargeAmountCoffee(coffee.id, 'decrease')
 
-    setQuantity((state) => state - 1)
+      setQuantity((state) => state - 1)
+    }
   }
 
   function handleRemoveCoffee() {
