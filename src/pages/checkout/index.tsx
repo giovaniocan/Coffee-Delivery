@@ -46,6 +46,14 @@ export function Checkout() {
     },
   })
 
+  const totalItems = cartItems.reduce((total, item) => {
+    return total + item.price * item.quantSelected
+  }, 0)
+
+  const deliveryPrice = 3.5
+
+  const totalCart = deliveryPrice + totalItems
+
   const { handleSubmit, reset } = NewForm
 
   const navigate = useNavigate()
@@ -71,16 +79,16 @@ export function Checkout() {
           <SubTotal>
             <div>
               <p>Total de itens</p>
-              <h4>R$ 29,70</h4>
+              <h4>R$ {totalItems.toFixed(2)}</h4>
             </div>
             <div>
               <p>Entrega</p>
-              <h4>R$ 3,50</h4>
+              <h4>R${deliveryPrice.toFixed(2)}</h4>
             </div>
           </SubTotal>
           <Total>
             <p>Total</p>
-            <p>R$ 33,20</p>
+            <p>R$ {totalItems !== 0 ? totalCart.toFixed(2) : 0}</p>
           </Total>
 
           <FinishedButton type="submit">confirmar pedido</FinishedButton>

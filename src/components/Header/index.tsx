@@ -16,7 +16,7 @@ export function Header() {
       <nav>
         <IconMap>
           <MapPin size={22} weight="fill" />
-          Sua cidade
+          Goioerê, PR
         </IconMap>
 
         <IconCar>
