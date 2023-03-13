@@ -23,13 +23,21 @@ interface CardCoffeeProps {
   coffee: Coffee
 }
 export function CardCoffee({ coffee }: CardCoffeeProps) {
-  const { increseAmountCoffee } = useContext(CardCoffeeContext)
+  const { ChargeAmountCoffee } = useContext(CardCoffeeContext)
   const [quantity, setQuantity] = useState(coffee.quantSelected)
+
   function handleIncreaseAmount() {
-    increseAmountCoffee(coffee.id)
+    ChargeAmountCoffee(coffee.id, 'increase')
 
     setQuantity((state) => state + 1)
   }
+
+  function DecreaseIncreaseAmount() {
+    ChargeAmountCoffee(coffee.id, 'decrease')
+
+    setQuantity((state) => state - 1)
+  }
+
   return (
     <CoffeeCard>
       <div>
@@ -38,7 +46,7 @@ export function CardCoffee({ coffee }: CardCoffeeProps) {
           <p>{coffee.title}</p>
           <ButtonOfCard>
             <PlusAndMinus>
-              <Minus />
+              <Minus onClick={DecreaseIncreaseAmount} />
               <h4>{quantity}</h4>
               <Plus onClick={handleIncreaseAmount} />
             </PlusAndMinus>

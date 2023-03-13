@@ -13,7 +13,7 @@ export interface CardCoffee {
 interface CardCoffeeContextType {
   cartItems: CardCoffee[]
   AddCoffeToCart: (data: CardCoffee, quant: number) => void
-  increseAmountCoffee: (id: number) => void
+  ChargeAmountCoffee: (id: number, type: 'increase' | 'decrease') => void
 }
 interface CardCoffeeProviderProps {
   children: ReactNode
@@ -50,19 +50,22 @@ export function CardCoffeeContextProvider({
     )
   }
 
-  function increseAmountCoffee(id: number) {
+  function ChargeAmountCoffee(id: number, type: 'increase' | 'decrease') {
     const coffeEExistsInCart = cartItems.findIndex((item) => item.id === id)
 
     serCartItems(
       produce(cartItems, (draft) => {
-        draft[coffeEExistsInCart].quantSelected += 1
+        draft[coffeEExistsInCart].quantSelected =
+          type === 'increase'
+            ? cartItems[coffeEExistsInCart].quantSelected + 1
+            : cartItems[coffeEExistsInCart].quantSelected - 1
       }),
     )
   }
 
   return (
     <CardCoffeeContext.Provider
-      value={{ AddCoffeToCart, cartItems, increseAmountCoffee }}
+      value={{ AddCoffeToCart, cartItems, ChargeAmountCoffee }}
     >
       {children}
     </CardCoffeeContext.Provider>
