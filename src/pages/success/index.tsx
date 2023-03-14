@@ -15,6 +15,7 @@ import { useLocation } from 'react-router-dom'
 
 export function Success() {
   const location = useLocation()
+
   return (
     <SuccessContainer>
       <Teste>
@@ -29,12 +30,12 @@ export function Success() {
             </MapIcon>
             <Content>
               <h3>
-                Entrega em Rua {location.state.street} nº{' '}
-                {location.state.houseNumer}
+                Entrega em Rua {location.state.street} nº
+                {location.state.houseNumber}
               </h3>
               <h4>
-                {' '}
-                {location.state.district} - {location.state.state}
+                {location.state.district} - {location.state.city},{' '}
+                {location.state.state}
               </h4>
             </Content>
           </Each>
