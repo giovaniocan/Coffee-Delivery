@@ -15,6 +15,7 @@ interface CardCoffeeContextType {
   AddCoffeToCart: (data: CardCoffee, quant: number) => void
   ChargeAmountCoffee: (id: number, type: 'increase' | 'decrease') => void
   removeCoffeFromList: (id: number) => void
+  cleanCart: () => void
 }
 interface CardCoffeeProviderProps {
   children: ReactNode
@@ -25,14 +26,14 @@ export const CardCoffeeContext = createContext({} as CardCoffeeContextType)
 export function CardCoffeeContextProvider({
   children,
 }: CardCoffeeProviderProps) {
-  const [cartItems, serCartItems] = useState<CardCoffee[]>([])
+  const [cartItems, setCartItems] = useState<CardCoffee[]>([])
 
   function AddCoffeToCart(data: CardCoffee, quant: number) {
     const coffeeAlreadyExistsInCart = cartItems.findIndex(
       (item) => item.id === data.id,
     )
 
-    serCartItems(
+    setCartItems(
       produce(cartItems, (draft) => {
         if (coffeeAlreadyExistsInCart === -1) {
           draft.push({
@@ -54,7 +55,7 @@ export function CardCoffeeContextProvider({
   function ChargeAmountCoffee(id: number, type: 'increase' | 'decrease') {
     const coffeEExistsInCart = cartItems.findIndex((item) => item.id === id)
 
-    serCartItems(
+    setCartItems(
       produce(cartItems, (draft) => {
         draft[coffeEExistsInCart].quantSelected =
           type === 'increase'
@@ -67,12 +68,19 @@ export function CardCoffeeContextProvider({
   function removeCoffeFromList(id: number) {
     const coffeEExistsInCart = cartItems.findIndex((item) => item.id === id)
     if (coffeEExistsInCart !== -1) {
-      serCartItems(
+      setCartItems(
         produce(cartItems, (draft) => {
           draft.splice(coffeEExistsInCart, 1)
         }),
       )
     }
+  }
+  function cleanCart() {
+    setCartItems(
+      produce(cartItems, (draft) => {
+        draft.splice(0, draft.length)
+      }),
+    )
   }
 
   return (
@@ -82,6 +90,7 @@ export function CardCoffeeContextProvider({
         cartItems,
         ChargeAmountCoffee,
         removeCoffeFromList,
+        cleanCart,
       }}
     >
       {children}

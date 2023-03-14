@@ -30,7 +30,7 @@ const NewFormValidationSchema = zod.object({
 export type NewFormData = zod.infer<typeof NewFormValidationSchema>
 
 export function Checkout() {
-  const { cartItems } = useContext(CardCoffeeContext)
+  const { cartItems, cleanCart } = useContext(CardCoffeeContext)
 
   const NewForm = useForm<NewFormData>({
     resolver: zodResolver(NewFormValidationSchema),
@@ -61,6 +61,7 @@ export function Checkout() {
   function onSubmit(data: NewFormData) {
     navigate('/success', { state: data })
     reset()
+    cleanCart()
   }
 
   return (
