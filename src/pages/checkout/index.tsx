@@ -27,7 +27,7 @@ const NewFormValidationSchema = zod.object({
   paymentMethods: zod.string(),
 })
 
-type NewFormData = zod.infer<typeof NewFormValidationSchema>
+export type NewFormData = zod.infer<typeof NewFormValidationSchema>
 
 export function Checkout() {
   const { cartItems } = useContext(CardCoffeeContext)
@@ -59,9 +59,8 @@ export function Checkout() {
   const navigate = useNavigate()
 
   function onSubmit(data: NewFormData) {
-    console.log(data) // faça algo com os dados aqui
+    navigate('/success', { state: data })
     reset()
-    navigate('/success')
   }
 
   return (
