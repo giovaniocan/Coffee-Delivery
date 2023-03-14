@@ -11,8 +11,10 @@ import {
 } from './styles'
 import moto from '../../assets/motocycle.svg'
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
+import { useLocation } from 'react-router-dom'
 
 export function Success() {
+  const location = useLocation()
   return (
     <SuccessContainer>
       <Teste>
@@ -26,8 +28,14 @@ export function Success() {
               <MapPin size={16} weight="fill" color="#fff" />
             </MapIcon>
             <Content>
-              <h3>Entrega em ......</h3>
-              <h4> O resto</h4>
+              <h3>
+                Entrega em Rua {location.state.street} nº{' '}
+                {location.state.houseNumer}
+              </h3>
+              <h4>
+                {' '}
+                {location.state.district} - {location.state.state}
+              </h4>
             </Content>
           </Each>
           <Each>
@@ -45,7 +53,7 @@ export function Success() {
             </CashIcon>
             <Content>
               <h4>Pagamento na entrega</h4>
-              <h3> Cartão de credito </h3>
+              <h3> {location.state.paymentMethods} </h3>
             </Content>
           </Each>
         </InfoOrder>
