@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from 'react'
+import { createContext, ReactNode, useEffect, useState } from 'react'
 import { produce } from 'immer'
 export interface CardCoffee {
   id: number
@@ -26,7 +26,20 @@ export const CardCoffeeContext = createContext({} as CardCoffeeContextType)
 export function CardCoffeeContextProvider({
   children,
 }: CardCoffeeProviderProps) {
-  const [cartItems, setCartItems] = useState<CardCoffee[]>([])
+  const [cartItems, setCartItems] = useState<CardCoffee[]>(() => {
+    const storedStateAsJSON = localStorage.getItem(
+      '@coffee-delivery:items-in-cart-1.0',
+    )
+    if (storedStateAsJSON) {
+      return JSON.parse(storedStateAsJSON)
+    }
+    return []
+  })
+  useEffect(() => {
+    const stateJSON = JSON.stringify(cartItems)
+
+    localStorage.setItem('@coffee-delivery:items-in-cart-1.0', stateJSON)
+  }, [cartItems])
 
   function AddCoffeToCart(data: CardCoffee, quant: number) {
     const coffeeAlreadyExistsInCart = cartItems.findIndex(
